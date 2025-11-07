@@ -59,7 +59,7 @@ def main() -> None:
     print(f"Starting Plane MCP Server v{version}", file=sys.stderr)
     print(f"Server listening on {host}:{port} (transport: {transport})", file=sys.stderr)
     print("Registered tools: metadata, user, projects, issues, modules, module-issues, cycles, cycle-issues, worklogs", file=sys.stderr)
-    
+
     try:
         # Run the server with configured transport (blocks until stopped)
         mcp.run(transport=transport)
