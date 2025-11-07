@@ -32,6 +32,7 @@ if missing_vars:
 version = get_version()
 host = os.getenv("MCP_HOST", "0.0.0.0")
 port = int(os.getenv("MCP_PORT", "8000"))
+transport = os.getenv("MCP_TRANSPORT", "stdio")
 
 # Create FastMCP server
 mcp = FastMCP(
@@ -56,12 +57,12 @@ register_worklog_tools(mcp)
 def main() -> None:
     """Main entry point for the server."""
     print(f"Starting Plane MCP Server v{version}", file=sys.stderr)
-    print(f"Server listening on {host}:{port}", file=sys.stderr)
+    print(f"Server listening on {host}:{port} (transport: {transport})", file=sys.stderr)
     print("Registered tools: metadata, user, projects, issues, modules, module-issues, cycles, cycle-issues, worklogs", file=sys.stderr)
     
     try:
-        # Run the server (blocks until stopped)
-        mcp.run()
+        # Run the server with configured transport (blocks until stopped)
+        mcp.run(transport=transport)
     except KeyboardInterrupt:
         print("\nShutting down Plane MCP Server...", file=sys.stderr)
     except Exception as e:
