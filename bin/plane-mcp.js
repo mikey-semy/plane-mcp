@@ -22,7 +22,7 @@ function checkUv() {
 async function main() {
   // Check for uv installation
   const hasUv = await checkUv();
-  
+
   if (!hasUv) {
     console.error('Error: uv is not installed.');
     console.error('');

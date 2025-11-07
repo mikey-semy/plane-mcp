@@ -37,7 +37,7 @@ function installDeps() {
       stdio: 'inherit',
       shell: process.platform === 'win32'
     });
-    
+
     uvSync.on('close', (code) => {
       if (code === 0) {
         console.log('');
@@ -53,7 +53,7 @@ function installDeps() {
 async function main() {
   try {
     const hasUv = await checkUv();
-    
+
     if (!hasUv) {
       console.log('⚠️  uv is not installed.');
       console.log('');
@@ -73,7 +73,7 @@ async function main() {
     }
 
     await installDeps();
-    
+
     console.log('');
     console.log('🎉 plane-mcp is ready to use!');
     console.log('');
@@ -83,7 +83,7 @@ async function main() {
     console.log('   PLANE_API_HOST_URL - (optional) default: https://api.plane.so/');
     console.log('');
     console.log('🚀 Run: npx @mikey-semy/plane-mcp');
-    
+
   } catch (error) {
     console.error('');
     console.error('❌ Installation failed:', error.message);
