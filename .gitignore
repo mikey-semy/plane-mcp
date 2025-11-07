@@ -1,0 +1,101 @@
+# FastAPI
+
+# Общие
+node_modules
+
+*.log
+
+logs/.envdist
+
+.pytest_cache/
+
+__pycache__/.env.localadmin-ui
+
+*.py[cod]
+
+*$py.class.DS_Storestatic/assets
+
+
+
+# Environment*.logstatic/email/test-emails
+
+.env
+
+.env.local.env
+
+.env.dev
+
+.env.prod# Python.env.docker
+
+.venv/
+
+venv/__pycache__/.env.local
+
+env/
+
+*.py[cod].env.*.local
+
+# Database
+
+*.sqlite*$py.class*.log
+
+*.db*.so
+
+alembic/versions/*.py.Python
+
+!alembic/versions/__init__.pyvenv/
+
+env/
+
+# Media files.venv
+
+media/.pytest_cache/
+
+uploads/
+
+# Node.js
+
+# IDEnode_modules/
+
+.vscode/npm-debug.log*
+
+.idea/yarn-debug.log*
+
+*.swpyarn-error.log*
+
+*.swo
+
+# IDE
+.vscode/*
+!.vscode/.env.example
+!.vscode/mcp.json.example
+.idea/
+*.swp
+*.swo
+
+# MCP конфигурация (реальные API ключи - НЕ коммитить!)
+.vscode/.env
+.vscode/mcp.json
+
+# OS
+.DS_Store
+
+Thumbs.db*.swp
+
+*.swo
+
+# Distribution
+
+dist/# Базы данных
+
+build/*.sqlite
+
+*.egg-info/*.db
+
+# Coverage
+.coverage
+htmlcov/
+.tox/
+
+# Docker
+docker-compose.override.yml
