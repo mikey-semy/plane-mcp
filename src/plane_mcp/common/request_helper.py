@@ -9,8 +9,6 @@ import httpx
 class PlaneAPIError(Exception):
     """Exception raised for Plane API errors."""
 
-    pass
-
 
 async def make_plane_request(
     method: str,

@@ -204,21 +204,59 @@ plane-mcp/
 │   └── plane_mcp/
 │       ├── __init__.py
 │       ├── server.py          # Основной сервер
-│       ├── schemas.py         # Pydantic модели
+│       ├── schemas/           # Pydantic модели (новая структура)
+│       │   ├── __init__.py
+│       │   ├── base.py        # Базовые классы и миксины
+│       │   ├── project.py     # Project
+│       │   ├── issue.py       # Issue, IssueType
+│       │   ├── module.py      # Module, ModuleIssue
+│       │   ├── cycle.py       # Cycle, CycleIssue
+│       │   ├── metadata.py    # State, Label
+│       │   └── worklog.py     # IssueWorkLog
 │       ├── common/
 │       │   ├── request_helper.py  # HTTP клиент для Plane API
 │       │   └── version.py
 │       └── tools/
-│           ├── issues.py
-│           ├── projects.py
+│           ├── cycle_issues.py
 │           ├── cycles.py
-│           ├── modules.py
+│           ├── issue_comments.py
+│           ├── issues.py
 │           ├── metadata.py
-│           └── user.py
+│           ├── module_issues.py
+│           ├── modules.py
+│           ├── projects.py
+│           ├── user.py
+│           └── worklogs.py
 ├── pyproject.toml
 ├── Dockerfile
 └── docker-compose.yml
 ```
+
+### Архитектура схем
+
+Все Pydantic модели организованы с использованием наследования для DRY-кода:
+
+**Базовые классы (base.py):**
+- `PlaneBaseModel` - корневой класс с общими настройками
+- `TimestampedModel` - добавляет created_at, updated_at
+- `AuditedModel` - добавляет created_by, updated_by
+- `WorkspaceOwnedModel` - добавляет workspace
+- `ProjectOwnedModel` - добавляет project
+- `SoftDeletableModel` - добавляет deleted_at
+- `ArchivableModel` - добавляет archived_at
+- `ExternallyIdentifiableModel` - добавляет external_id, external_source
+- `SortableModel` - добавляет sort_order
+- `FullAuditModel` - объединяет все вышеперечисленные + id
+
+**Доменные модели:**
+- **project.py** - `Project` (наследуется от FullAuditModel)
+- **issue.py** - `Issue`, `IssueType` 
+- **module.py** - `Module`, `ModuleIssue`
+- **cycle.py** - `Cycle`, `CycleIssue`
+- **metadata.py** - `State`, `Label`
+- **worklog.py** - `IssueWorkLog`
+
+Каждая схема полностью документирована с описанием всех полей, типов и ограничений.
 
 ### Запуск тестов
 ```bash
