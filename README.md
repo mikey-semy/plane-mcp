@@ -125,7 +125,12 @@ PLANE_WORKSPACE_SLUG=your-workspace-slug
 PLANE_API_HOST_URL=https://api.plane.so/
 MCP_HOST=0.0.0.0
 MCP_PORT=8000
+
+# Порт на хосте (если 8000 занят, измените на другой)
+HOST_PORT=8000
 ```
+
+**Примечание:** Если порт 8000 уже занят, измените `HOST_PORT` на другой (например, 8001, 9000).
 
 ### 2. Запуск с Docker Compose:
 
@@ -133,7 +138,7 @@ MCP_PORT=8000
 docker-compose up -d
 ```
 
-Сервер будет доступен на `http://localhost:8000/sse`
+Сервер будет доступен на `http://localhost:HOST_PORT/sse` (по умолчанию `http://localhost:8000/sse`)
 
 ### 3. Проверка работы:
 
@@ -182,7 +187,10 @@ uv run plane-mcp
 | `PLANE_WORKSPACE_SLUG` | Slug вашего workspace | - | ✅ |
 | `PLANE_API_HOST_URL` | URL Plane API | `https://api.plane.so/` | ❌ |
 | `MCP_HOST` | Хост для HTTP сервера | `0.0.0.0` | ❌ |
-| `MCP_PORT` | Порт для HTTP сервера | `8000` | ❌ |
+| `MCP_PORT` | Порт контейнера (внутренний) | `8000` | ❌ |
+| `HOST_PORT` | Порт хоста (внешний) для Docker | `8000` | ❌ |
+
+**Для продакшена:** используйте `.env.production` с вашими настройками.
 
 ### Использование с MCP клиентами
 

@@ -1,21 +1,19 @@
-version: '3.8'
-
 services:
   plane-mcp:
     build: .
     container_name: plane-mcp-server
     ports:
-      - "${MCP_PORT:-8000}:8000"
+      - "${HOST_PORT:-8000}:${MCP_PORT:-8000}"
     environment:
       - PLANE_API_KEY=${PLANE_API_KEY}
       - PLANE_WORKSPACE_SLUG=${PLANE_WORKSPACE_SLUG}
       - PLANE_API_HOST_URL=${PLANE_API_HOST_URL:-https://api.plane.so/}
       - MCP_TRANSPORT=sse
       - MCP_HOST=0.0.0.0
-      - MCP_PORT=8000
+      - MCP_PORT=${MCP_PORT:-8000}
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/sse"]
+      test: ["CMD", "curl", "-f", "http://localhost:${MCP_PORT:-8000}/sse"]
       interval: 30s
       timeout: 10s
       retries: 3

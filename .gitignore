@@ -25,6 +25,8 @@ __pycache__/.env.localadmin-ui
 
 .env.dev
 
+.env.production
+
 .env.prod# Python.env.docker
 
 .venv/
