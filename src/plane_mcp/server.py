@@ -58,10 +58,17 @@ def main() -> None:
     print(f"Starting Plane MCP Server v{version}", file=sys.stderr)
     print(f"Server listening on {host}:{port}", file=sys.stderr)
     print("Registered tools: metadata, user, projects, issues, modules, module-issues, cycles, cycle-issues, worklogs", file=sys.stderr)
-
-    # Run the server
-    mcp.run()
-
+    
+    try:
+        # Run the server (blocks until stopped)
+        mcp.run()
+    except KeyboardInterrupt:
+        print("\nShutting down Plane MCP Server...", file=sys.stderr)
+    except Exception as e:
+        print(f"ERROR: Server crashed: {e}", file=sys.stderr)
+        import traceback
+        traceback.print_exc()
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
