@@ -190,10 +190,69 @@ FastMCP автоматически поддерживает:
 - **SSE** (Server-Sent Events) - HTTP транспорт на `http://host:port/sse`
 - **stdio** - стандартный ввод/вывод для локальных клиентов
 
-Для подключения к серверу через SSE используйте endpoint:
+#### Подключение через VSCode
+
+Добавьте конфигурацию в `.vscode/mcp.json` или `mcp.json` в корне проекта:
+
+```json
+{
+  "mcpServers": {
+    "plane": {
+      "command": "uv",
+      "args": [
+        "run",
+        "plane-mcp"
+      ],
+      "cwd": "c:/Users/Mike/Projects/plane-mcp",
+      "env": {
+        "PLANE_API_KEY": "plane_xxxxxxxxxxxxxxxxxxxx",
+        "PLANE_WORKSPACE_SLUG": "your-workspace-slug",
+        "PLANE_API_HOST_URL": "https://api.plane.so/"
+      }
+    }
+  }
+}
 ```
-http://localhost:8000/sse
+
+**Для удалённого подключения через SSE:**
+
+```json
+{
+  "mcpServers": {
+    "plane": {
+      "url": "http://localhost:8000/sse"
+    }
+  }
+}
 ```
+
+#### Подключение через Claude Desktop
+
+Добавьте конфигурацию в `claude_desktop_config.json`:
+
+**Windows:** `%APPDATA%\Claude\claude_desktop_config.json`  
+**macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
+
+```json
+{
+  "mcpServers": {
+    "plane": {
+      "command": "uv",
+      "args": [
+        "run",
+        "plane-mcp"
+      ],
+      "env": {
+        "PLANE_API_KEY": "plane_xxxxxxxxxxxxxxxxxxxx",
+        "PLANE_WORKSPACE_SLUG": "your-workspace-slug",
+        "PLANE_API_HOST_URL": "https://api.plane.so/"
+      }
+    }
+  }
+}
+```
+
+После сохранения конфигурации перезапустите VSCode или Claude Desktop.
 
 ## Разработка
 
