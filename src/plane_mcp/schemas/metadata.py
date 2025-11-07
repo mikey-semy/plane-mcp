@@ -11,9 +11,9 @@ from .base import FullAuditModel
 class State(FullAuditModel):
     """
     Issue state schema (workflow status).
-    
+
     States represent different stages in a workflow (e.g., "To Do", "In Progress", "Done").
-    
+
     Attributes:
         name: State name (max 255 characters)
         description: Optional description
@@ -45,9 +45,9 @@ class State(FullAuditModel):
 class Label(FullAuditModel):
     """
     Issue label schema for categorization.
-    
+
     Labels provide flexible categorization for issues (e.g., "bug", "urgent", "backend").
-    
+
     Attributes:
         name: Label name (max 255 characters)
         description: Optional description

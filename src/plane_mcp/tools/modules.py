@@ -11,12 +11,12 @@ from plane_mcp.common.request_helper import make_plane_request
 
 def register_module_tools(mcp: FastMCP) -> None:
     """Register module-related tools."""
-    
+
     @mcp.tool()
     async def list_modules(project_id: str) -> str:
         """
         Get all modules for a specific project.
-        
+
         Args:
             project_id: The UUID identifier of the project
         """
@@ -26,12 +26,12 @@ def register_module_tools(mcp: FastMCP) -> None:
             f"workspaces/{workspace_slug}/projects/{project_id}/modules/"
         )
         return json.dumps(response, indent=2)
-    
+
     @mcp.tool()
     async def get_module(project_id: str, module_id: str) -> str:
         """
         Get details of a specific module.
-        
+
         Args:
             project_id: The UUID identifier of the project
             module_id: The UUID identifier of the module
@@ -42,7 +42,7 @@ def register_module_tools(mcp: FastMCP) -> None:
             f"workspaces/{workspace_slug}/projects/{project_id}/modules/{module_id}/"
         )
         return json.dumps(response, indent=2)
-    
+
     @mcp.tool()
     async def create_module(
         project_id: str,
@@ -54,7 +54,7 @@ def register_module_tools(mcp: FastMCP) -> None:
     ) -> str:
         """
         Create a new module in a project.
-        
+
         Args:
             project_id: The UUID identifier of the project
             name: The name of the module
@@ -65,7 +65,7 @@ def register_module_tools(mcp: FastMCP) -> None:
         """
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         body: dict = {"name": name}
-        
+
         if description:
             body["description"] = description
         if start_date:
@@ -74,14 +74,14 @@ def register_module_tools(mcp: FastMCP) -> None:
             body["target_date"] = target_date
         if lead:
             body["lead"] = lead
-        
+
         response = await make_plane_request(
             "POST",
             f"workspaces/{workspace_slug}/projects/{project_id}/modules/",
             body=body
         )
         return json.dumps(response, indent=2)
-    
+
     @mcp.tool()
     async def update_module(
         project_id: str,
@@ -95,7 +95,7 @@ def register_module_tools(mcp: FastMCP) -> None:
     ) -> str:
         """
         Update an existing module.
-        
+
         Args:
             project_id: The UUID identifier of the project
             module_id: The UUID identifier of the module
@@ -108,7 +108,7 @@ def register_module_tools(mcp: FastMCP) -> None:
         """
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         body: dict = {}
-        
+
         if name:
             body["name"] = name
         if description:
@@ -121,19 +121,19 @@ def register_module_tools(mcp: FastMCP) -> None:
             body["lead"] = lead
         if status:
             body["status"] = status
-        
+
         response = await make_plane_request(
             "PATCH",
             f"workspaces/{workspace_slug}/projects/{project_id}/modules/{module_id}/",
             body=body
         )
         return json.dumps(response, indent=2)
-    
+
     @mcp.tool()
     async def delete_module(project_id: str, module_id: str) -> str:
         """
         Delete a module.
-        
+
         Args:
             project_id: The UUID identifier of the project
             module_id: The UUID identifier of the module

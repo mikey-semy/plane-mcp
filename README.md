@@ -231,7 +231,7 @@ FastMCP автоматически поддерживает:
 
 Добавьте конфигурацию в `claude_desktop_config.json`:
 
-**Windows:** `%APPDATA%\Claude\claude_desktop_config.json`  
+**Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
 **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
 
 ```json
@@ -310,7 +310,7 @@ plane-mcp/
 
 **Доменные модели:**
 - **project.py** - `Project` (наследуется от FullAuditModel)
-- **issue.py** - `Issue`, `IssueType` 
+- **issue.py** - `Issue`, `IssueType`
 - **module.py** - `Module`, `ModuleIssue`
 - **cycle.py** - `Cycle`, `CycleIssue`
 - **metadata.py** - `State`, `Label`

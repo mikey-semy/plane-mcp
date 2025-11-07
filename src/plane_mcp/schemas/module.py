@@ -12,9 +12,9 @@ from .base import FullAuditModel, TimestampedModel
 class Module(FullAuditModel):
     """
     Module schema (work grouping).
-    
+
     Modules group related issues together (similar to epics or features).
-    
+
     Attributes:
         name: Module name (max 255 characters)
         description: Optional description
@@ -63,9 +63,9 @@ class Module(FullAuditModel):
 class ModuleIssue(TimestampedModel):
     """
     Module-Issue relationship schema.
-    
+
     Links issues to modules (many-to-many relationship).
-    
+
     Attributes:
         id: Unique identifier
         module: UUID of module

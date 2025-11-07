@@ -11,12 +11,12 @@ from plane_mcp.common.request_helper import make_plane_request
 
 def register_issue_tools(mcp: FastMCP) -> None:
     """Register issue-related tools."""
-    
+
     @mcp.tool()
     async def list_project_issues(project_id: str) -> str:
         """
         Get all issues for a specific project.
-        
+
         Args:
             project_id: The UUID identifier of the project to get issues for
         """
@@ -25,7 +25,7 @@ def register_issue_tools(mcp: FastMCP) -> None:
             "GET",
             f"workspaces/{workspace_slug}/projects/{project_id}/issues/"
         )
-        
+
         # Simplify response
         if isinstance(response, dict) and "results" in response:
             issues = [
@@ -46,14 +46,14 @@ def register_issue_tools(mcp: FastMCP) -> None:
                 "results": issues,
             }
             return json.dumps(result, indent=2)
-        
+
         return json.dumps(response, indent=2)
-    
+
     @mcp.tool()
     async def get_issue(project_id: str, issue_id: str) -> str:
         """
         Get details of a specific issue.
-        
+
         Args:
             project_id: The UUID identifier of the project
             issue_id: The UUID identifier of the issue
@@ -64,15 +64,15 @@ def register_issue_tools(mcp: FastMCP) -> None:
             f"workspaces/{workspace_slug}/projects/{project_id}/issues/{issue_id}/"
         )
         return json.dumps(response, indent=2)
-    
+
     @mcp.tool()
     async def get_issue_using_readable_identifier(project_identifier: str, issue_identifier: str) -> str:
         """
         Get a specific issue using its readable identifier.
-        
+
         When issue identifier is provided as FIRST-123, ABC-123, etc.
         For FIRST-123: project_identifier is FIRST and issue_identifier is 123
-        
+
         Args:
             project_identifier: The readable identifier of the project (e.g., 'FIRST' for FIRST-123)
             issue_identifier: The issue number (e.g., '123' for FIRST-123)
@@ -83,12 +83,12 @@ def register_issue_tools(mcp: FastMCP) -> None:
             f"workspaces/{workspace_slug}/issues/{project_identifier}-{issue_identifier}/"
         )
         return json.dumps(response, indent=2)
-    
+
     @mcp.tool()
     async def get_issue_comments(project_id: str, issue_id: str) -> str:
         """
         Get all comments for a specific issue.
-        
+
         Args:
             project_id: The UUID identifier of the project
             issue_id: The UUID identifier of the issue
@@ -99,12 +99,12 @@ def register_issue_tools(mcp: FastMCP) -> None:
             f"workspaces/{workspace_slug}/projects/{project_id}/issues/{issue_id}/comments/"
         )
         return json.dumps(response, indent=2)
-    
+
     @mcp.tool()
     async def add_issue_comment(project_id: str, issue_id: str, comment_html: str) -> str:
         """
         Add a comment to a specific issue.
-        
+
         Args:
             project_id: The UUID identifier of the project
             issue_id: The UUID identifier of the issue
@@ -117,7 +117,7 @@ def register_issue_tools(mcp: FastMCP) -> None:
             body={"comment_html": comment_html}
         )
         return json.dumps(response, indent=2)
-    
+
     @mcp.tool()
     async def create_issue(
         project_id: str,
@@ -130,7 +130,7 @@ def register_issue_tools(mcp: FastMCP) -> None:
     ) -> str:
         """
         Create a new issue in a project.
-        
+
         Args:
             project_id: The UUID identifier of the project
             name: The title/name of the issue
@@ -142,7 +142,7 @@ def register_issue_tools(mcp: FastMCP) -> None:
         """
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         body: dict = {"name": name}
-        
+
         if description:
             body["description_html"] = description
         if state_id:
@@ -153,14 +153,14 @@ def register_issue_tools(mcp: FastMCP) -> None:
             body["assignees"] = assignees
         if labels:
             body["labels"] = labels
-        
+
         response = await make_plane_request(
             "POST",
             f"workspaces/{workspace_slug}/projects/{project_id}/issues/",
             body=body
         )
         return json.dumps(response, indent=2)
-    
+
     @mcp.tool()
     async def update_issue(
         project_id: str,
@@ -174,7 +174,7 @@ def register_issue_tools(mcp: FastMCP) -> None:
     ) -> str:
         """
         Update an existing issue.
-        
+
         Args:
             project_id: The UUID identifier of the project
             issue_id: The UUID identifier of the issue to update
@@ -187,7 +187,7 @@ def register_issue_tools(mcp: FastMCP) -> None:
         """
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         body: dict = {}
-        
+
         if name:
             body["name"] = name
         if description:
@@ -200,19 +200,19 @@ def register_issue_tools(mcp: FastMCP) -> None:
             body["assignees"] = assignees
         if labels is not None:
             body["labels"] = labels
-        
+
         response = await make_plane_request(
             "PATCH",
             f"workspaces/{workspace_slug}/projects/{project_id}/issues/{issue_id}/",
             body=body
         )
         return json.dumps(response, indent=2)
-    
+
     @mcp.tool()
     async def delete_issue(project_id: str, issue_id: str) -> str:
         """
         Delete an issue.
-        
+
         Args:
             project_id: The UUID identifier of the project
             issue_id: The UUID identifier of the issue to delete

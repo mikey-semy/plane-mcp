@@ -183,31 +183,31 @@ import json
 
 def register_my_tools(mcp: FastMCP):
     """Register my tools with the MCP server."""
-    
+
     @mcp.tool()
     async def my_new_tool(entity_id: str, param: str) -> str:
         """
         Short description of what this tool does.
-        
+
         Args:
             entity_id: The UUID identifier of the entity
             param: Description of this parameter
         """
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
-        
+
         # Для GET запроса
         response = await make_plane_request(
             "GET",
             f"workspaces/{workspace_slug}/my-entities/{entity_id}/"
         )
-        
+
         # Для POST с телом
         response = await make_plane_request(
             "POST",
             f"workspaces/{workspace_slug}/my-entities/",
             body={"param": param}
         )
-        
+
         return json.dumps(response, indent=2)
 ```
 
@@ -257,17 +257,17 @@ async def create_issue(project_id, name, priority=None):
 def my_function(param1: str, param2: int) -> bool:
     """
     Short description of the function.
-    
+
     Longer description if needed. Explain what the function does,
     not how it does it.
-    
+
     Args:
         param1: Description of param1
         param2: Description of param2
-        
+
     Returns:
         Description of return value
-        
+
     Raises:
         PlaneAPIError: When API request fails
     """
@@ -285,17 +285,17 @@ def my_function(param1: str, param2: int) -> bool:
 # ✅ Хорошо
 class UserManager:
     MAX_RETRIES = 3
-    
+
     def get_user_by_id(self, user_id: str) -> User:
         pass
-    
+
     def _internal_helper(self):
         pass
 
 # ❌ Плохо
 class user_manager:
     maxRetries = 3
-    
+
     def GetUserByID(self, UserID):
         pass
 ```

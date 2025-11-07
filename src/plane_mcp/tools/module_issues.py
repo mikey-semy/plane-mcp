@@ -10,12 +10,12 @@ from plane_mcp.common.request_helper import make_plane_request
 
 def register_module_issue_tools(mcp: FastMCP) -> None:
     """Register module-issue-related tools."""
-    
+
     @mcp.tool()
     async def list_module_issues(project_id: str, module_id: str) -> str:
         """
         Get all issues for a specific module.
-        
+
         Args:
             project_id: The UUID identifier of the project containing the module
             module_id: The UUID identifier of the module to get issues for
@@ -26,12 +26,12 @@ def register_module_issue_tools(mcp: FastMCP) -> None:
             f"workspaces/{workspace_slug}/projects/{project_id}/modules/{module_id}/module-issues/"
         )
         return json.dumps(response, indent=2)
-    
+
     @mcp.tool()
     async def add_module_issues(project_id: str, module_id: str, issues: list[str]) -> str:
         """
         Add issues to a module. Assign module to issues.
-        
+
         Args:
             project_id: The UUID identifier of the project containing the module
             module_id: The UUID identifier of the module to add issues to
@@ -44,12 +44,12 @@ def register_module_issue_tools(mcp: FastMCP) -> None:
             body={"issues": issues}
         )
         return json.dumps(response, indent=2)
-    
+
     @mcp.tool()
     async def delete_module_issue(project_id: str, module_id: str, issue_id: str) -> str:
         """
         Remove an issue from a module. Unassign module from issue.
-        
+
         Args:
             project_id: The UUID identifier of the project containing the module
             module_id: The UUID identifier of the module containing the issue

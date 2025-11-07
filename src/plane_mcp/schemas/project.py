@@ -11,10 +11,10 @@ from .base import FullAuditModel
 class Project(FullAuditModel):
     """
     Plane project schema.
-    
+
     Projects are the main organizational unit in Plane, containing issues,
     modules, cycles, and other work items.
-    
+
     Attributes:
         name: Display name of the project (max 255 characters)
         description: Optional detailed description
@@ -42,13 +42,13 @@ class Project(FullAuditModel):
     icon_prop: Optional[Any] = Field(None, description="Icon properties")
     logo_props: Optional[Any] = Field(None, description="Logo properties")
     cover_image: Optional[str] = Field(None, description="Cover image URL")
-    
+
     network: int = Field(description="Network visibility level")
     project_lead: Optional[UUID] = Field(None, description="UUID of project lead")
-    
+
     estimate: Optional[UUID] = Field(None, description="UUID of estimation system")
     default_state: Optional[UUID] = Field(None, description="UUID of default state for new issues")
-    
+
     archive_in: Optional[int] = Field(
         None,
         ge=0,

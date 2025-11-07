@@ -12,9 +12,9 @@ from .base import TimestampedModel
 class IssueWorkLog(TimestampedModel):
     """
     Issue work log entry schema.
-    
+
     Tracks time spent on issues.
-    
+
     Attributes:
         id: Unique identifier
         issue: UUID of parent issue

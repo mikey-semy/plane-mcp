@@ -12,9 +12,9 @@ from .base import FullAuditModel, TimestampedModel
 class Cycle(FullAuditModel):
     """
     Cycle schema (sprint/iteration).
-    
+
     Cycles represent sprints or iterations for time-boxed work.
-    
+
     Attributes:
         name: Cycle name (max 255 characters)
         description: Optional description
@@ -55,9 +55,9 @@ class Cycle(FullAuditModel):
 class CycleIssue(TimestampedModel):
     """
     Cycle-Issue relationship schema.
-    
+
     Links issues to cycles (many-to-many relationship).
-    
+
     Attributes:
         id: Unique identifier
         cycle: UUID of cycle

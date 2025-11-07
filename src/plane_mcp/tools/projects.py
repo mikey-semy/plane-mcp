@@ -11,7 +11,7 @@ from plane_mcp.common.request_helper import make_plane_request
 
 def register_project_tools(mcp: FastMCP) -> None:
     """Register project-related tools."""
-    
+
     @mcp.tool()
     async def get_projects() -> str:
         """Get all projects for the current user."""
@@ -20,7 +20,7 @@ def register_project_tools(mcp: FastMCP) -> None:
             "GET",
             f"workspaces/{workspace_slug}/projects/"
         )
-        
+
         # Simplify response
         if isinstance(response, dict) and "results" in response:
             projects = [
@@ -34,9 +34,9 @@ def register_project_tools(mcp: FastMCP) -> None:
                 for p in response["results"]
             ]
             return json.dumps(projects, indent=2)
-        
+
         return json.dumps(response, indent=2)
-    
+
     @mcp.tool()
     async def create_project(
         name: str,
@@ -45,21 +45,21 @@ def register_project_tools(mcp: FastMCP) -> None:
     ) -> str:
         """
         Create a new project.
-        
+
         Args:
             name: The name of the project
             identifier: The identifier of the project (typically 5 uppercase characters)
             description: Optional project description
         """
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
-        
+
         body = {
             "name": name,
             "identifier": identifier.upper().replace(" ", ""),
         }
         if description:
             body["description"] = description
-        
+
         response = await make_plane_request(
             "POST",
             f"workspaces/{workspace_slug}/projects/",
