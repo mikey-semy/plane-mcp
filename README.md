@@ -8,7 +8,7 @@
 
 Plane's Model Context Protocol Server - Python реализация 🔌 ⌨️ 🔥
 
-Предоставляет **47 инструментов** для работы с проектами, задачами, модулями и циклами в Plane.
+Предоставляет **48 инструментов** для работы с проектами, задачами, модулями и циклами в Plane.
 
 > **Оригинальный проект**: [makeplane/plane-mcp-server](https://github.com/makeplane/plane-mcp-server) (TypeScript)
 > **plane.so** | Topics: `model-context-protocol` `mcp-server` `python` `fastmcp`
@@ -24,7 +24,7 @@ Plane's Model Context Protocol Server - Python реализация 🔌 ⌨️ 
 
 ## ✨ Возможности
 
-- ✅ **47 инструментов** - полное покрытие Plane API
+- ✅ **48 инструментов** - полное покрытие Plane API
 - ✅ **SSE Transport** - HTTP сервер для удалённого доступа
 - ✅ **stdio Transport** - для локальной интеграции с Claude Desktop
 - ✅ **Полный CRUD** для Issues, Projects, Modules, Cycles
@@ -42,33 +42,22 @@ Plane's Model Context Protocol Server - Python реализация 🔌 ⌨️ 
 - `get_current_user` - информация о текущем пользователе
 - `get_workspace_members` - список участников workspace
 
-### Metadata (15 tools)
-**Issue Types (5):**
-- `list_issue_types`, `get_issue_type`, `create_issue_type`, `update_issue_type`, `delete_issue_type`
+### Metadata (14 tools)
+**Issue Types (4):**
+- `get_issue_type`, `create_issue_type`, `update_issue_type`, `delete_issue_type`
 
 **States (5):**
 - `list_states`, `get_state`, `create_state`, `update_state`, `delete_state`
 
 **Labels (5):**
 - `list_labels`, `get_label`, `create_label`, `update_label`, `delete_label`
-- `get_state` - детали статуса
-- `create_state` - создание статуса
-- `update_state` - обновление статуса
-- `delete_state` - удаление статуса
 
-**Labels:**
-- `list_labels` - список меток
-- `get_label` - детали метки
-- `create_label` - создание метки
-- `update_label` - обновление метки
-- `delete_label` - удаление метки
-
-### Projects (2 tools)
+### Projects (3 tools)
 - `get_projects` - список всех проектов
 - `create_project` - создание нового проекта
-
-### Issues (8 tools)
 - `list_project_issues` - список задач проекта
+
+### Issues (7 tools)
 - `get_issue` - детали конкретной задачи
 - `get_issue_using_readable_identifier` - получить задачу по читаемому ID (FIRST-123)
 - `create_issue` - создание задачи
@@ -89,18 +78,18 @@ Plane's Model Context Protocol Server - Python реализация 🔌 ⌨️ 
 - `add_module_issues` - добавить задачи в модуль
 - `delete_module_issue` - удалить задачу из модуля
 
-### Cycles (6 tools)
+### Cycles (5 tools)
 - `list_cycles` - список циклов проекта
 - `get_cycle` - детали цикла
 - `create_cycle` - создание цикла
 - `update_cycle` - обновление цикла
 - `delete_cycle` - удаление цикла
-- `transfer_cycle_issues` - перенести задачи из одного цикла в другой
 
-### Cycle Issues (3 tools)
+### Cycle Issues (4 tools)
 - `list_cycle_issues` - список задач в цикле
 - `add_cycle_issues` - добавить задачи в цикл
 - `delete_cycle_issue` - удалить задачу из цикла
+- `transfer_cycle_issues` - перенести задачи из одного цикла в другой
 
 ### Worklogs (5 tools)
 - `get_issue_worklogs` - список рабочих логов задачи
@@ -109,7 +98,7 @@ Plane's Model Context Protocol Server - Python реализация 🔌 ⌨️ 
 - `update_worklog` - обновить рабочий лог
 - `delete_worklog` - удалить рабочий лог
 
-**Всего: 47 инструментов**
+**Всего: 48 инструментов**
 
 ## 🚀 Быстрый старт
 
