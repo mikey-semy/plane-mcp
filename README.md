@@ -194,6 +194,8 @@ FastMCP автоматически поддерживает:
 
 Добавьте конфигурацию в `.vscode/mcp.json` или `mcp.json` в корне проекта:
 
+**Локальная установка (stdio):**
+
 ```json
 {
   "mcpServers": {
@@ -203,7 +205,6 @@ FastMCP автоматически поддерживает:
         "run",
         "plane-mcp"
       ],
-      "cwd": "c:/Users/Mike/Projects/plane-mcp",
       "env": {
         "PLANE_API_KEY": "plane_xxxxxxxxxxxxxxxxxxxx",
         "PLANE_WORKSPACE_SLUG": "your-workspace-slug",
@@ -214,13 +215,13 @@ FastMCP автоматически поддерживает:
 }
 ```
 
-**Для удалённого подключения через SSE:**
+**Удалённое подключение (SSE):**
 
 ```json
 {
   "mcpServers": {
     "plane": {
-      "url": "http://localhost:8000/sse"
+      "url": "http://mcp.plane.equiply.ru/sse"
     }
   }
 }
