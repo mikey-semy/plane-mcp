@@ -10,7 +10,7 @@ COPY pyproject.toml uv.lock ./
 COPY src ./src
 
 # Install dependencies
-RUN uv sync --frozen --no-dev
+RUN uv sync --frozen --no-group dev
 
 # Expose port for SSE transport
 EXPOSE 8000
