@@ -1,0 +1,32 @@
+# Development files
+.git/
+.github/
+.vscode/
+*.pyc
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+
+# Environment and config
+.env
+.env.*
+!.env.example
+.dockerignore
+docker-compose.yml
+Dockerfile
+
+# Documentation (keep only README.md)
+CONTRIBUTING.md
+CHANGELOG.md
+docs/
+
+# Tests
+tests/
+example/
+
+# CI/CD
+.gitlab-ci.yml
+.travis.yml

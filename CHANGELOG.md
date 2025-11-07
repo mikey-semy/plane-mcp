@@ -5,6 +5,29 @@
 Формат основан на [Keep a Changelog](https://keepachangelog.com/ru/1.0.0/),
 и этот проект следует [Semantic Versioning](https://semver.org/lang/ru/).
 
+## [0.1.0] - 2024-11-08
+
+### 🎉 NPM Package Release
+
+#### Added
+- ✅ **NPM package** [@mikey-semy/plane-mcp](https://www.npmjs.com/package/@mikey-semy/plane-mcp)
+- ✅ Node.js wrapper (`bin/plane-mcp.js`) для запуска Python сервера
+- ✅ Автоматическая установка Python зависимостей (`scripts/install-python.js`)
+- ✅ Поддержка `npx -y @mikey-semy/plane-mcp` для запуска без установки
+- ✅ Документация для NPM пользователей ([USAGE.md](USAGE.md))
+- ✅ Инструкции по публикации ([NPM_PUBLISH.md](NPM_PUBLISH.md))
+- ✅ Release notes ([RELEASE_NOTES.md](RELEASE_NOTES.md))
+
+#### Changed
+- 📝 Обновлён README с примерами использования NPM пакета
+- 📝 Добавлены примеры конфигурации для VSCode и Claude Desktop
+- 📝 Добавлен NPM badge в README
+
+#### Technical
+- 📦 package.json с правильной конфигурацией bin
+- 🔧 .npmignore для контроля публикуемых файлов
+- 🔧 .gitignore для исключения *.tgz файлов
+
 ## [1.0.0] - 2024-03-XX
 
 ### 🎉 Первый релиз - Полная функциональная совместимость с TypeScript версией

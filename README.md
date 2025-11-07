@@ -2,6 +2,7 @@
 
 [![Python](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/downloads/)
 [![FastMCP](https://img.shields.io/badge/FastMCP-1.21.0-green.svg)](https://github.com/jlowin/fastmcp)
+[![NPM](https://img.shields.io/npm/v/@mikey-semy/plane-mcp)](https://www.npmjs.com/package/@mikey-semy/plane-mcp)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Original](https://img.shields.io/badge/Based%20on-Official%20Plane%20MCP-blue.svg)](https://github.com/makeplane/plane-mcp-server)
 
@@ -14,8 +15,12 @@ Plane's Model Context Protocol Server - Python реализация 🔌 ⌨️ 
 
 ## 📚 Документация
 
+- **[ARCHITECTURE.md](docs/ARCHITECTURE.md)** - Архитектура и сравнение stdio vs SSE
+- **[USAGE.md](docs/USAGE.md)** - Подробная инструкция по использованию NPM пакета
+- **[COPILOT_USAGE.md](docs/COPILOT_USAGE.md)** - Как использовать с GitHub Copilot в VSCode
 - **[CONTRIBUTING.md](CONTRIBUTING.md)** - Руководство для контрибьюторов
 - **[CHANGELOG.md](CHANGELOG.md)** - История изменений
+- **[NPM_PUBLISH.md](docs/NPM_PUBLISH.md)** - Публикация форка в NPM
 
 ## ✨ Возможности
 
@@ -106,7 +111,37 @@ Plane's Model Context Protocol Server - Python реализация 🔌 ⌨️ 
 
 **Всего: 47 инструментов**
 
-## Быстрый старт с Docker
+## 🚀 Быстрый старт
+
+### Вариант 1: NPM (рекомендуется для локального использования)
+
+**Требования:** Node.js 18+, [uv](https://docs.astral.sh/uv/getting-started/installation/)
+
+✅ **Пакет опубликован в NPM**: [@mikey-semy/plane-mcp](https://www.npmjs.com/package/@mikey-semy/plane-mcp)
+
+```bash
+# Использование без установки (npx)
+npx -y @mikey-semy/plane-mcp
+
+# Или глобальная установка
+npm install -g @mikey-semy/plane-mcp
+plane-mcp
+```
+
+**Переменные окружения:**
+```bash
+# Windows PowerShell
+$env:PLANE_API_KEY="plane_xxxxxxxxxxxxxxxxxxxx"
+$env:PLANE_WORKSPACE_SLUG="your-workspace-slug"
+$env:PLANE_API_HOST_URL="https://api.plane.so/"  # опционально
+
+# Linux/macOS
+export PLANE_API_KEY="plane_xxxxxxxxxxxxxxxxxxxx"
+export PLANE_WORKSPACE_SLUG="your-workspace-slug"
+export PLANE_API_HOST_URL="https://api.plane.so/"  # опционально
+```
+
+### Вариант 2: Docker (для продакшена)
 
 ### 1. Создайте `.env` файл:
 
@@ -192,27 +227,116 @@ uv run plane-mcp
 
 **Для продакшена:** используйте `.env.production` с вашими настройками.
 
+## 🌐 Развёртывание
+
+### Публичный NPM пакет
+
+✅ Пакет опубликован и доступен: [@mikey-semy/plane-mcp](https://www.npmjs.com/package/@mikey-semy/plane-mcp)
+
+Любой пользователь может использовать:
+```bash
+npx -y @mikey-semy/plane-mcp
+```
+
+### Docker развёртывание
+
+Используйте Docker Compose для продакшен развёртывания. Сервер будет доступен по HTTP на указанном порту.
+
+**Пример продакшен URL** (временный адрес на Dokploy):
+```
+http://mcp-plane-e2jgos-367e9c-62-60-246-35.traefik.me:9000/sse
+```
+
+Для постоянного URL настройте свой домен в `.env.production`.
+
 ### Использование с MCP клиентами
 
 FastMCP автоматически поддерживает:
 - **SSE** (Server-Sent Events) - HTTP транспорт на `http://host:port/sse`
 - **stdio** - стандартный ввод/вывод для локальных клиентов
 
+#### 🤔 Какой вариант выбрать?
+
+**stdio (локальный)** - рекомендуется:
+- ✅ Можно работать с несколькими workspace одновременно
+- ✅ Разные API ключи для разных workspace
+- ✅ Полный контроль над конфигурацией
+- ⚠️ Требует установку uv локально
+
+**SSE (удалённый)** - для централизованного использования:
+- ✅ Не требует Python/uv на клиентской машине
+- ✅ Быстрое подключение (сервер уже работает)
+- ✅ Единая конфигурация для команды
+- ⚠️ Фиксированный workspace на сервере
+- ⚠️ Требует сетевое подключение к серверу
+
+📖 **Подробнее**: [COPILOT_USAGE.md](docs/COPILOT_USAGE.md)
+
 #### Подключение через VSCode
 
 Добавьте конфигурацию в `.vscode/mcp.json` или `mcp.json` в корне проекта:
 
-**Локальная установка (stdio):**
+**Вариант 1: NPM пакет (stdio) - для работы с разными workspace**
+
+Позволяет переключаться между workspace просто меняя `env`:
+
+```json
+{
+  "servers": {
+    "plane-profitool": {
+      "command": "npx",
+      "args": ["-y", "@mikey-semy/plane-mcp"],
+      "env": {
+        "PLANE_API_KEY": "YOUR_PLANE_API_KEY",
+        "PLANE_API_HOST_URL": "https://plane.equiply.ru/",
+        "PLANE_WORKSPACE_SLUG": "profitool-store"
+      }
+    },
+    "plane-another-project": {
+      "command": "npx",
+      "args": ["-y", "@mikey-semy/plane-mcp"],
+      "env": {
+        "PLANE_API_KEY": "YOUR_PLANE_API_KEY",
+        "PLANE_API_HOST_URL": "https://plane.equiply.ru/",
+        "PLANE_WORKSPACE_SLUG": "another-workspace"
+      }
+    }
+  }
+}
+```
+
+**Вариант 2: Удалённое подключение (SSE)**
+
+Подключение к развёрнутому серверу. **Внимание:** workspace фиксирован на сервере!
+
+```json
+{
+  "servers": {
+    "plane": {
+      "url": "http://mcp-plane-e2jgos-367e9c-62-60-246-35.traefik.me:9000/sse"
+    }
+  }
+}
+```
+
+**Для работы с несколькими workspace через SSE:** развернуте отдельный сервер для каждого workspace.
+
+
+#### Подключение через Claude Desktop
+
+Добавьте конфигурацию в `claude_desktop_config.json`:
+
+**Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
+**macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
+
+**Вариант 1: NPM пакет (рекомендуется)**
 
 ```json
 {
   "mcpServers": {
     "plane": {
-      "command": "uv",
-      "args": [
-        "run",
-        "plane-mcp"
-      ],
+      "command": "npx",
+      "args": ["-y", "@mikey-semy/plane-mcp"],
       "env": {
         "PLANE_API_KEY": "plane_xxxxxxxxxxxxxxxxxxxx",
         "PLANE_WORKSPACE_SLUG": "your-workspace-slug",
@@ -223,34 +347,14 @@ FastMCP автоматически поддерживает:
 }
 ```
 
-**Удалённое подключение (SSE):**
-
-```json
-{
-  "mcpServers": {
-    "plane": {
-      "url": "http://mcp.plane.equiply.ru/sse"
-    }
-  }
-}
-```
-
-#### Подключение через Claude Desktop
-
-Добавьте конфигурацию в `claude_desktop_config.json`:
-
-**Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
-**macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
+**Вариант 2: Локальная установка (uv)**
 
 ```json
 {
   "mcpServers": {
     "plane": {
       "command": "uv",
-      "args": [
-        "run",
-        "plane-mcp"
-      ],
+      "args": ["run", "plane-mcp"],
       "env": {
         "PLANE_API_KEY": "plane_xxxxxxxxxxxxxxxxxxxx",
         "PLANE_WORKSPACE_SLUG": "your-workspace-slug",
@@ -342,7 +446,11 @@ uv run ruff format
 1. Войдите в Plane
 2. Перейдите в Settings → API Tokens
 3. Создайте новый токен
-4. Скопируйте и сохраните в `.env`
+4. Скопируйте и сохраните в `.env` или используйте как переменную окружения
+
+## 📦 Публикация в NPM
+
+Если вы хотите опубликовать свой форк пакета, следуйте инструкциям в [NPM_PUBLISH.md](NPM_PUBLISH.md).
 
 ## Лицензия
 

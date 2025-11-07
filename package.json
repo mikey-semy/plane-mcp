@@ -1,0 +1,39 @@
+{
+  "name": "@mikey-semy/plane-mcp",
+  "version": "0.1.0",
+  "description": "Plane MCP Server - Python implementation with NPM wrapper for easy usage",
+  "type": "module",
+  "bin": {
+    "plane-mcp": "./bin/plane-mcp.js"
+  },
+  "scripts": {
+    "postinstall": "node ./scripts/install-python.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "plane",
+    "plane-so",
+    "mcp-server",
+    "python",
+    "fastmcp"
+  ],
+  "author": "mikey-semy",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mikey-semy/plane-mcp.git"
+  },
+  "homepage": "https://github.com/mikey-semy/plane-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/mikey-semy/plane-mcp/issues"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ]
+}

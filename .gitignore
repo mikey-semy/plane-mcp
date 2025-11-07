@@ -37,6 +37,10 @@ env/
 
 *.py[cod].env.*.local
 
+# NPM
+*.tgz
+mikey-semy-plane-mcp-*.tgz
+
 # Database
 
 *.sqlite*$py.class*.log
