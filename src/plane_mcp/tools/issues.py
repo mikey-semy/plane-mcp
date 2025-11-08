@@ -85,6 +85,39 @@ def register_issue_tools(mcp: FastMCP) -> None:
         return json.dumps(response, indent=2)
 
     @mcp.tool()
+    async def get_issue_details_by_readable_id(issue_readable_id: str) -> str:
+        """
+        Get full issue details using readable ID (e.g. PROFI-48).
+        Returns project_id, issue_id, current state, and other details needed for operations.
+
+        Args:
+            issue_readable_id: The readable identifier of the issue (e.g., 'PROFI-48', 'ABC-123')
+        """
+        workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
+        response = await make_plane_request(
+            "GET",
+            f"workspaces/{workspace_slug}/issues/{issue_readable_id}/"
+        )
+        
+        # Extract key information for operations
+        if isinstance(response, dict):
+            key_info = {
+                "issue_id": response.get("id"),
+                "project_id": response.get("project_id") or response.get("project"),
+                "readable_id": issue_readable_id,
+                "name": response.get("name"),
+                "state_id": response.get("state"),
+                "state_detail": response.get("state_detail"),
+                "priority": response.get("priority"),
+                "assignees": response.get("assignees", []),
+                "created_at": response.get("created_at"),
+                "updated_at": response.get("updated_at")
+            }
+            return json.dumps(key_info, indent=2)
+        
+        return json.dumps(response, indent=2)
+
+    @mcp.tool()
     async def get_issue_comments(project_id: str, issue_id: str) -> str:
         """
         Get all comments for a specific issue.
