@@ -23,7 +23,7 @@ def register_module_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         response = await make_plane_request(
             "GET",
-            f"v1/workspaces/{workspace_slug}/projects/{project_id}/modules/"
+            f"workspaces/{workspace_slug}/projects/{project_id}/modules/"
         )
         return json.dumps(response, indent=2)
 
@@ -39,7 +39,7 @@ def register_module_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         response = await make_plane_request(
             "GET",
-            f"v1/workspaces/{workspace_slug}/projects/{project_id}/modules/{module_id}/"
+            f"workspaces/{workspace_slug}/projects/{project_id}/modules/{module_id}/"
         )
         return json.dumps(response, indent=2)
 
@@ -77,7 +77,7 @@ def register_module_tools(mcp: FastMCP) -> None:
 
         response = await make_plane_request(
             "POST",
-            f"v1/workspaces/{workspace_slug}/projects/{project_id}/modules/",
+            f"workspaces/{workspace_slug}/projects/{project_id}/modules/",
             body=body
         )
         return json.dumps(response, indent=2)
@@ -124,7 +124,7 @@ def register_module_tools(mcp: FastMCP) -> None:
 
         response = await make_plane_request(
             "PATCH",
-            f"v1/workspaces/{workspace_slug}/projects/{project_id}/modules/{module_id}/",
+            f"workspaces/{workspace_slug}/projects/{project_id}/modules/{module_id}/",
             body=body
         )
         return json.dumps(response, indent=2)
@@ -141,6 +141,6 @@ def register_module_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         await make_plane_request(
             "DELETE",
-            f"v1/workspaces/{workspace_slug}/projects/{project_id}/modules/{module_id}/"
+            f"workspaces/{workspace_slug}/projects/{project_id}/modules/{module_id}/"
         )
         return "Module deleted successfully"

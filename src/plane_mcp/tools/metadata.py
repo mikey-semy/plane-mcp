@@ -22,7 +22,7 @@ def register_metadata_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         response = await make_plane_request(
             "GET",
-            f"v1/workspaces/{workspace_slug}/projects/{project_id}/labels/"
+            f"workspaces/{workspace_slug}/projects/{project_id}/labels/"
         )
         return json.dumps(response, indent=2)
 
@@ -38,7 +38,7 @@ def register_metadata_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         response = await make_plane_request(
             "GET",
-            f"v1/workspaces/{workspace_slug}/projects/{project_id}/labels/{label_id}/"
+            f"workspaces/{workspace_slug}/projects/{project_id}/labels/{label_id}/"
         )
         return json.dumps(response, indent=2)
 
@@ -61,7 +61,7 @@ def register_metadata_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         response = await make_plane_request(
             "POST",
-            f"v1/workspaces/{workspace_slug}/projects/{project_id}/labels/",
+            f"workspaces/{workspace_slug}/projects/{project_id}/labels/",
             body={
                 "name": name,
                 "description": description,
@@ -99,7 +99,7 @@ def register_metadata_tools(mcp: FastMCP) -> None:
 
         response = await make_plane_request(
             "PATCH",
-            f"v1/workspaces/{workspace_slug}/projects/{project_id}/labels/{label_id}/",
+            f"workspaces/{workspace_slug}/projects/{project_id}/labels/{label_id}/",
             body=body
         )
         return json.dumps(response, indent=2)
@@ -116,7 +116,7 @@ def register_metadata_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         await make_plane_request(
             "DELETE",
-            f"v1/workspaces/{workspace_slug}/projects/{project_id}/labels/{label_id}/"
+            f"workspaces/{workspace_slug}/projects/{project_id}/labels/{label_id}/"
         )
         return "Label deleted successfully"
 
@@ -132,7 +132,7 @@ def register_metadata_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         response = await make_plane_request(
             "GET",
-            f"v1/workspaces/{workspace_slug}/projects/{project_id}/states/{state_id}/"
+            f"workspaces/{workspace_slug}/projects/{project_id}/states/{state_id}/"
         )
         return json.dumps(response, indent=2)
 
@@ -157,7 +157,7 @@ def register_metadata_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         response = await make_plane_request(
             "POST",
-            f"v1/workspaces/{workspace_slug}/projects/{project_id}/states/",
+            f"workspaces/{workspace_slug}/projects/{project_id}/states/",
             body={
                 "name": name,
                 "group": group,
@@ -200,7 +200,7 @@ def register_metadata_tools(mcp: FastMCP) -> None:
 
         response = await make_plane_request(
             "PATCH",
-            f"v1/workspaces/{workspace_slug}/projects/{project_id}/states/{state_id}/",
+            f"workspaces/{workspace_slug}/projects/{project_id}/states/{state_id}/",
             body=body
         )
         return json.dumps(response, indent=2)
@@ -217,7 +217,7 @@ def register_metadata_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         await make_plane_request(
             "DELETE",
-            f"v1/workspaces/{workspace_slug}/projects/{project_id}/states/{state_id}/"
+            f"workspaces/{workspace_slug}/projects/{project_id}/states/{state_id}/"
         )
         return "State deleted successfully"
 
@@ -233,7 +233,7 @@ def register_metadata_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         response = await make_plane_request(
             "GET",
-            f"v1/workspaces/{workspace_slug}/projects/{project_id}/issue-types/{issue_type_id}/"
+            f"workspaces/{workspace_slug}/projects/{project_id}/issue-types/{issue_type_id}/"
         )
         return json.dumps(response, indent=2)
 
@@ -258,7 +258,7 @@ def register_metadata_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         response = await make_plane_request(
             "POST",
-            f"v1/workspaces/{workspace_slug}/projects/{project_id}/issue-types/",
+            f"workspaces/{workspace_slug}/projects/{project_id}/issue-types/",
             body={
                 "name": name,
                 "description": description,
@@ -301,7 +301,7 @@ def register_metadata_tools(mcp: FastMCP) -> None:
 
         response = await make_plane_request(
             "PATCH",
-            f"v1/workspaces/{workspace_slug}/projects/{project_id}/issue-types/{issue_type_id}/",
+            f"workspaces/{workspace_slug}/projects/{project_id}/issue-types/{issue_type_id}/",
             body=body
         )
         return json.dumps(response, indent=2)
@@ -318,7 +318,7 @@ def register_metadata_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         await make_plane_request(
             "DELETE",
-            f"v1/workspaces/{workspace_slug}/projects/{project_id}/issue-types/{issue_type_id}/"
+            f"workspaces/{workspace_slug}/projects/{project_id}/issue-types/{issue_type_id}/"
         )
         return "Issue type deleted successfully"
 
@@ -333,6 +333,6 @@ def register_metadata_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         response = await make_plane_request(
             "GET",
-            f"v1/workspaces/{workspace_slug}/projects/{project_id}/states/"
+            f"workspaces/{workspace_slug}/projects/{project_id}/states/"
         )
         return json.dumps(response, indent=2)

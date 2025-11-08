@@ -18,7 +18,7 @@ def register_project_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         response = await make_plane_request(
             "GET",
-            f"v1/workspaces/{workspace_slug}/projects/"
+            f"workspaces/{workspace_slug}/projects/"
         )
 
         # Simplify response
@@ -62,7 +62,7 @@ def register_project_tools(mcp: FastMCP) -> None:
 
         response = await make_plane_request(
             "POST",
-            f"v1/workspaces/{workspace_slug}/projects/",
+            f"workspaces/{workspace_slug}/projects/",
             body=body
         )
         return json.dumps(response, indent=2)
