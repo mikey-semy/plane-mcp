@@ -11,7 +11,16 @@ services:
       - MCP_TRANSPORT=sse
       - MCP_HOST=0.0.0.0
       - MCP_PORT=${MCP_PORT:-8000}
+      # Basic Auth credentials
+      - BASIC_AUTH_USER=${BASIC_AUTH_USER:-admin}
+      - BASIC_AUTH_PASSWORD=${BASIC_AUTH_PASSWORD:-SecurePassword123}
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.middlewares.mcp-auth.basicauth.users=${BASIC_AUTH_USER}:${BASIC_AUTH_PASSWORD_HASH}"
+      - "traefik.http.routers.mcp.middlewares=mcp-auth"
+      - "traefik.http.routers.mcp.rule=PathPrefix(`/`)"
+      - "traefik.http.services.mcp.loadbalancer.server.port=${MCP_PORT:-8000}"
     # Healthcheck disabled - FastMCP SSE endpoint may not respond to curl
     # healthcheck:
     #   test: ["CMD", "curl", "-f", "http://localhost:${MCP_PORT:-8000}/sse"]

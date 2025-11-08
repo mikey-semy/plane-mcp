@@ -23,7 +23,7 @@ def register_cycle_issue_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         response = await make_plane_request(
             "GET",
-            f"workspaces/{workspace_slug}/projects/{project_id}/cycles/{cycle_id}/cycle-issues/"
+            f"v1/workspaces/{workspace_slug}/projects/{project_id}/cycles/{cycle_id}/cycle-issues/"
         )
         return json.dumps(response, indent=2)
 
@@ -40,7 +40,7 @@ def register_cycle_issue_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         response = await make_plane_request(
             "POST",
-            f"workspaces/{workspace_slug}/projects/{project_id}/cycles/{cycle_id}/cycle-issues/",
+            f"v1/workspaces/{workspace_slug}/projects/{project_id}/cycles/{cycle_id}/cycle-issues/",
             body={"issues": issues}
         )
         return json.dumps(response, indent=2)
@@ -58,6 +58,6 @@ def register_cycle_issue_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         await make_plane_request(
             "DELETE",
-            f"workspaces/{workspace_slug}/projects/{project_id}/cycles/{cycle_id}/cycle-issues/{issue_id}/"
+            f"v1/workspaces/{workspace_slug}/projects/{project_id}/cycles/{cycle_id}/cycle-issues/{issue_id}/"
         )
         return "Issue removed from cycle successfully"

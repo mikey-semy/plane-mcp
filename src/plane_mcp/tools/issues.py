@@ -23,7 +23,7 @@ def register_issue_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         response = await make_plane_request(
             "GET",
-            f"workspaces/{workspace_slug}/projects/{project_id}/issues/"
+            f"v1/workspaces/{workspace_slug}/projects/{project_id}/issues/"
         )
 
         # Simplify response
@@ -61,7 +61,7 @@ def register_issue_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         response = await make_plane_request(
             "GET",
-            f"workspaces/{workspace_slug}/projects/{project_id}/issues/{issue_id}/"
+            f"v1/workspaces/{workspace_slug}/projects/{project_id}/issues/{issue_id}/"
         )
         return json.dumps(response, indent=2)
 
@@ -80,7 +80,7 @@ def register_issue_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         response = await make_plane_request(
             "GET",
-            f"workspaces/{workspace_slug}/issues/{project_identifier}-{issue_identifier}/"
+            f"v1/workspaces/{workspace_slug}/issues/{project_identifier}-{issue_identifier}/"
         )
         return json.dumps(response, indent=2)
 
@@ -96,7 +96,7 @@ def register_issue_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         response = await make_plane_request(
             "GET",
-            f"workspaces/{workspace_slug}/projects/{project_id}/issues/{issue_id}/comments/"
+            f"v1/workspaces/{workspace_slug}/projects/{project_id}/issues/{issue_id}/comments/"
         )
         return json.dumps(response, indent=2)
 
@@ -113,7 +113,7 @@ def register_issue_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         response = await make_plane_request(
             "POST",
-            f"workspaces/{workspace_slug}/projects/{project_id}/issues/{issue_id}/comments/",
+            f"v1/workspaces/{workspace_slug}/projects/{project_id}/issues/{issue_id}/comments/",
             body={"comment_html": comment_html}
         )
         return json.dumps(response, indent=2)
@@ -156,7 +156,7 @@ def register_issue_tools(mcp: FastMCP) -> None:
 
         response = await make_plane_request(
             "POST",
-            f"workspaces/{workspace_slug}/projects/{project_id}/issues/",
+            f"v1/workspaces/{workspace_slug}/projects/{project_id}/issues/",
             body=body
         )
         return json.dumps(response, indent=2)
@@ -203,7 +203,7 @@ def register_issue_tools(mcp: FastMCP) -> None:
 
         response = await make_plane_request(
             "PATCH",
-            f"workspaces/{workspace_slug}/projects/{project_id}/issues/{issue_id}/",
+            f"v1/workspaces/{workspace_slug}/projects/{project_id}/issues/{issue_id}/",
             body=body
         )
         return json.dumps(response, indent=2)
@@ -220,6 +220,6 @@ def register_issue_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         await make_plane_request(
             "DELETE",
-            f"workspaces/{workspace_slug}/projects/{project_id}/issues/{issue_id}/"
+            f"v1/workspaces/{workspace_slug}/projects/{project_id}/issues/{issue_id}/"
         )
         return "Issue deleted successfully"

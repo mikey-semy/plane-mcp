@@ -21,7 +21,7 @@ async def make_plane_request(
 
     Args:
         method: HTTP method (GET, POST, PATCH, DELETE)
-        path: API path (without /api/v1/ prefix)
+        path: API path (without /api/ prefix)
         body: Request body for POST/PATCH requests
         timeout: Request timeout in seconds
 
@@ -33,7 +33,7 @@ async def make_plane_request(
     """
     host_url = os.getenv("PLANE_API_HOST_URL", "https://api.plane.so/")
     host = host_url if host_url.endswith("/") else f"{host_url}/"
-    url = f"{host}api/v1/{path}"
+    url = f"{host}api/{path}"
 
     api_key = os.getenv("PLANE_API_KEY", "")
     if not api_key:
@@ -64,7 +64,16 @@ async def make_plane_request(
             return response.json()
 
     except httpx.HTTPStatusError as e:
-        error_msg = f"HTTP {e.response.status_code}: {e.response.text}"
+        status_code = e.response.status_code
+        error_text = e.response.text
+
+        if status_code == 403:
+            error_msg = f"HTTP 403 Forbidden: Access denied. Check project permissions and API key."
+        elif status_code == 404:
+            error_msg = f"HTTP 404 Not Found: {error_text}. Check the resource exists and API endpoint is correct."
+        else:
+            error_msg = f"HTTP {status_code}: {error_text}"
+
         raise PlaneAPIError(error_msg) from e
     except httpx.RequestError as e:
         raise PlaneAPIError(f"Request failed: {str(e)}") from e

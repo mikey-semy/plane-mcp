@@ -23,7 +23,7 @@ def register_cycle_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         response = await make_plane_request(
             "GET",
-            f"workspaces/{workspace_slug}/projects/{project_id}/cycles/"
+            f"v1/workspaces/{workspace_slug}/projects/{project_id}/cycles/"
         )
         return json.dumps(response, indent=2)
 
@@ -39,7 +39,7 @@ def register_cycle_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         response = await make_plane_request(
             "GET",
-            f"workspaces/{workspace_slug}/projects/{project_id}/cycles/{cycle_id}/"
+            f"v1/workspaces/{workspace_slug}/projects/{project_id}/cycles/{cycle_id}/"
         )
         return json.dumps(response, indent=2)
 
@@ -73,7 +73,7 @@ def register_cycle_tools(mcp: FastMCP) -> None:
 
         response = await make_plane_request(
             "POST",
-            f"workspaces/{workspace_slug}/projects/{project_id}/cycles/",
+            f"v1/workspaces/{workspace_slug}/projects/{project_id}/cycles/",
             body=body
         )
         return json.dumps(response, indent=2)
@@ -112,7 +112,7 @@ def register_cycle_tools(mcp: FastMCP) -> None:
 
         response = await make_plane_request(
             "PATCH",
-            f"workspaces/{workspace_slug}/projects/{project_id}/cycles/{cycle_id}/",
+            f"v1/workspaces/{workspace_slug}/projects/{project_id}/cycles/{cycle_id}/",
             body=body
         )
         return json.dumps(response, indent=2)
@@ -129,7 +129,7 @@ def register_cycle_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         await make_plane_request(
             "DELETE",
-            f"workspaces/{workspace_slug}/projects/{project_id}/cycles/{cycle_id}/"
+            f"v1/workspaces/{workspace_slug}/projects/{project_id}/cycles/{cycle_id}/"
         )
         return "Cycle deleted successfully"
 
@@ -146,7 +146,7 @@ def register_cycle_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         response = await make_plane_request(
             "POST",
-            f"workspaces/{workspace_slug}/projects/{project_id}/cycles/{cycle_id}/transfer-issues/",
+            f"v1/workspaces/{workspace_slug}/projects/{project_id}/cycles/{cycle_id}/transfer-issues/",
             body={"new_cycle_id": new_cycle_id}
         )
         return json.dumps(response, indent=2)

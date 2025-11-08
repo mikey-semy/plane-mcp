@@ -24,7 +24,7 @@ def register_worklog_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         response = await make_plane_request(
             "GET",
-            f"workspaces/{workspace_slug}/projects/{project_id}/issues/{issue_id}/worklogs/"
+            f"v1/workspaces/{workspace_slug}/projects/{project_id}/issues/{issue_id}/worklogs/"
         )
         return json.dumps(response, indent=2)
 
@@ -39,7 +39,7 @@ def register_worklog_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         response = await make_plane_request(
             "GET",
-            f"workspaces/{workspace_slug}/projects/{project_id}/total-worklogs/"
+            f"v1/workspaces/{workspace_slug}/projects/{project_id}/total-worklogs/"
         )
         return json.dumps(response, indent=2)
 
@@ -72,7 +72,7 @@ def register_worklog_tools(mcp: FastMCP) -> None:
 
         response = await make_plane_request(
             "POST",
-            f"workspaces/{workspace_slug}/projects/{project_id}/issues/{issue_id}/worklogs/",
+            f"v1/workspaces/{workspace_slug}/projects/{project_id}/issues/{issue_id}/worklogs/",
             body=body
         )
         return json.dumps(response, indent=2)
@@ -109,7 +109,7 @@ def register_worklog_tools(mcp: FastMCP) -> None:
 
         response = await make_plane_request(
             "PATCH",
-            f"workspaces/{workspace_slug}/projects/{project_id}/issues/{issue_id}/worklogs/{worklog_id}/",
+            f"v1/workspaces/{workspace_slug}/projects/{project_id}/issues/{issue_id}/worklogs/{worklog_id}/",
             body=body
         )
         return json.dumps(response, indent=2)
@@ -127,6 +127,6 @@ def register_worklog_tools(mcp: FastMCP) -> None:
         workspace_slug = os.getenv("PLANE_WORKSPACE_SLUG")
         await make_plane_request(
             "DELETE",
-            f"workspaces/{workspace_slug}/projects/{project_id}/issues/{issue_id}/worklogs/{worklog_id}/"
+            f"v1/workspaces/{workspace_slug}/projects/{project_id}/issues/{issue_id}/worklogs/{worklog_id}/"
         )
         return "Worklog deleted successfully"
