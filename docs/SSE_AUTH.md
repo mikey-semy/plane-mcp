@@ -45,13 +45,18 @@ Traefik автоматически подхватит новые значени�
 
 ## 📱 Подключение с Basic Auth
 
+⚠️ **ВАЖНО**: Современные клиенты MCP не поддерживают учетные данные в URL из-за ограничений Fetch API. Используйте заголовок `Authorization` вместо этого.
+
 ### VSCode mcp.json
 
 ```json
 {
   "servers": {
     "plane": {
-      "url": "https://admin:SecurePassword123@mcp.plane.equiply.ru:9000/sse"
+      "url": "https://mcp.plane.equiply.ru:9000/sse",
+      "headers": {
+        "Authorization": "Basic YWRtaW46U2VjdXJlUGFzc3dvcmQxMjM="
+      }
     }
   }
 }
@@ -63,13 +68,56 @@ Traefik автоматически подхватит новые значени�
 {
   "mcpServers": {
     "plane": {
-      "url": "https://admin:SecurePassword123@mcp.plane.equiply.ru:9000/sse"
+      "url": "https://mcp.plane.equiply.ru:9000/sse",
+      "headers": {
+        "Authorization": "Basic YWRtaW46U2VjdXJlUGFzc3dvcmQxMjM="
+      }
     }
   }
 }
 ```
 
-**Формат**: `https://username:password@domain:port/sse`
+**Формат заголовка**: `Basic <base64(username:password)>`
+
+### Как сгенерировать Authorization заголовок
+
+**Используйте готовые скрипты:**
+
+PowerShell (Windows):
+```powershell
+.\scripts\generate-auth-header.ps1 -Username "admin" -Password "SecurePassword123"
+```
+
+Bash (Linux/macOS):
+```bash
+chmod +x scripts/generate-auth-header.sh
+./scripts/generate-auth-header.sh admin SecurePassword123
+```
+
+**Или вручную:**
+
+В PowerShell:
+```powershell
+$credentials = "admin:SecurePassword123"
+$bytes = [System.Text.Encoding]::UTF8.GetBytes($credentials)
+$base64 = [Convert]::ToBase64String($bytes)
+Write-Output "Basic $base64"
+```
+
+В Bash/Linux:
+```bash
+echo -n "admin:SecurePassword123" | base64
+# Результат: YWRtaW46U2VjdXJlUGFzc3dvcmQxMjM=
+# Используйте: Basic YWRtaW46U2VjdXJlUGFzc3dvcmQxMjM=
+```
+
+В Python:
+```python
+import base64
+credentials = "admin:SecurePassword123"
+base64_credentials = base64.b64encode(credentials.encode()).decode()
+print(f"Basic {base64_credentials}")
+```
 
 ## 🧪 Тестирование доступа
 

@@ -33,7 +33,7 @@ async def make_plane_request(
     """
     host_url = os.getenv("PLANE_API_HOST_URL", "https://api.plane.so/")
     host = host_url if host_url.endswith("/") else f"{host_url}/"
-    url = f"{host}api/{path}"
+    url = f"{host}api/v1/{path}"
 
     api_key = os.getenv("PLANE_API_KEY", "")
     if not api_key:

@@ -320,6 +320,7 @@ FastMCP автоматически поддерживает:
 
 Подключение к вашему развёрнутому серверу. **Внимание:** workspace фиксирован на сервере!
 
+**Без авторизации:**
 ```json
 {
   "servers": {
@@ -330,7 +331,24 @@ FastMCP автоматически поддерживает:
 }
 ```
 
-**Примечание:** Замените `your-mcp-server.example.com` на адрес вашего сервера.
+**С Basic Auth (рекомендуется для production):**
+```json
+{
+  "servers": {
+    "plane": {
+      "url": "https://mcp.plane.equiply.ru:9000/sse",
+      "headers": {
+        "Authorization": "Basic YWRtaW46U2VjdXJlUGFzc3dvcmQxMjM="
+      }
+    }
+  }
+}
+```
+
+**Примечание:**
+- Замените `your-mcp-server.example.com` на адрес вашего сервера.
+- Для генерации `Authorization` заголовка см. [SSE_AUTH.md](docs/SSE_AUTH.md)
+- **НЕ используйте формат `https://user:pass@host/sse`** - не поддерживается клиентами MCP
 
 **Для работы с несколькими workspace через SSE:** разверните отдельный сервер для каждого workspace.
 
