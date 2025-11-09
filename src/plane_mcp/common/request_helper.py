@@ -66,11 +66,16 @@ async def make_plane_request(
     except httpx.HTTPStatusError as e:
         status_code = e.response.status_code
         error_text = e.response.text
+        
+        # Log the full request details for debugging
+        print(f"HTTP Request: {method.upper()} {url} \"{e.response.status_code} {e.response.reason_phrase}\"")
 
         if status_code == 403:
             error_msg = f"HTTP 403 Forbidden: Access denied. Check project permissions and API key."
         elif status_code == 404:
             error_msg = f"HTTP 404 Not Found: {error_text}. Check the resource exists and API endpoint is correct."
+        elif status_code == 400:
+            error_msg = f"HTTP 400 Bad Request: {error_text}. Check request payload format and required fields."
         else:
             error_msg = f"HTTP {status_code}: {error_text}"
 
